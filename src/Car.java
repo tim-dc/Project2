@@ -6,7 +6,10 @@ public class Car {
 		this.Capacity = Capacity;
 		this.identifier	= identifier;
 	}
-	
+
+	public void load(int passengerID){
+
+	}
 	
 	
 	
