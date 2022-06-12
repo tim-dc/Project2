@@ -7,7 +7,11 @@ public class Car {
 		this.identifier	= identifier;
 	}
 
-	public void load(int passengerID){
+	public void load(){
+
+	}
+
+	public void unload(){
 
 	}
 	
