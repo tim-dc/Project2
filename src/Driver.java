@@ -23,8 +23,15 @@ public class Driver {
 		System.out.print("Enter the number of passenger processes: ");
 		n = scan.nextInt();
 
-		System.out.print("Enter the capacity of the car: ");
-		C = scan.nextInt();
+		do {
+			System.out.print("Enter the capacity of the car: ");
+			C = scan.nextInt();
+
+			if (C >= n)
+			{
+				System.out.println("Invalid Input. Please Try Again");
+			}
+		} while (C >= n);
 
 		System.out.print("Enter the number of cars: ");
 		m = scan.nextInt();
