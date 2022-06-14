@@ -15,7 +15,7 @@ public class Car extends Thread {
 
 	public void load() throws InterruptedException{
 		//put in passengers
-		System.out.println("Capacity = " + capacity + " Queue Size = " + Driver.line.size());
+		//System.out.println("Capacity = " + capacity + " Queue Size = " + Driver.line.size());
 		boolean isFull = false;
 		int counter = 0;
 
@@ -28,8 +28,8 @@ public class Car extends Thread {
 					pCar.add(p);
 					System.out.println("Passenger # " + p.getPassengerID()+ " joined Car " + this.identifier);
 				}
-				System.out.println("----- PCar ----- " + pCar.size());
-				System.out.println("remaining passengers: " + Driver.line.size());
+				//System.out.println("----- PCar ----- " + pCar.size());
+				//System.out.println("remaining passengers: " + Driver.line.size());
 				//car starts running
 				doAction(" is at capacity");
 				//take a bit longer to travel
@@ -52,9 +52,9 @@ public class Car extends Thread {
 		//car unloads passengers
 		doAction(" may unload passengers");
 		//drop passenger here
-		System.out.println("Current pCar  Size = " + pCar.size());
+		//System.out.println("Current pCar  Size = " + pCar.size());
 		pCar.removeAll(pCar);
-		System.out.println("pCar after Clear Size = " + pCar.size());
+		//System.out.println("pCar after Clear Size = " + pCar.size());
 	}
 
 	private void doAction(String action) throws InterruptedException {
