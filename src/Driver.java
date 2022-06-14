@@ -8,20 +8,19 @@ public class Driver {
 	static Passenger passengers[];
 	static Queue<Passenger> line = new LinkedList<>();
 
+
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 		
 		int n, C, m;
 		Scanner scan = new Scanner(System.in);
 		ArrayList<Car> cars = new ArrayList<Car>();
-
 		
 		ArrayList<Semaphore> LoadingArea = new ArrayList<Semaphore>();
 		ArrayList<Semaphore> UnLoadingArea = new ArrayList<Semaphore>();
 		
 		System.out.print("Enter the number of passenger processes: ");
 		n = scan.nextInt();
-
 
 		// Instantiate Passengers
 		passengers = new Passenger[n];
@@ -30,17 +29,13 @@ public class Driver {
 			passengers[i] = new Passenger(i);
 		}
 
-
 		for(int i = 0; i < n; i++){
 			System.out.println("Passenger #" + passengers[i].getPassengerID());
 			passengers[i].start();
 		}
 
-		System.out.println("--QUEUE--");
 
 
-
-		
 //		System.out.print("Enter the capacity of the car: ");
 //		C = scan.nextInt();
 //
@@ -60,6 +55,12 @@ public class Driver {
 //		for(int k = 0; k < m; k++) {
 //			UnLoadingArea.add(new Semaphore());
 //		}
+
+
+		// If passenger queue is enough for max capacity
+//			if(line.size() >= Car capacity);
+
+
 
 	}
 

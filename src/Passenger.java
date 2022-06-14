@@ -8,10 +8,14 @@ public class Passenger extends Thread{
 
     public void board(int carID) {
 
+        // If car has invoked load
+//        for(int i=0; i< )
+
     }
 
     public void unboard(int carID) {
 
+        // If car has invoked unload
     }
 
     private void wander() {

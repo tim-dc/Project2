@@ -1,20 +1,27 @@
+import java.util.ArrayList;
 import java.util.concurrent.Semaphore;
 
-public class Car implements Runnable {
+public class Car extends Thread {
 	
 	private final int Capacity;
 	private final int identifier;
+	private int currLoad;
+	static ArrayList<Passenger> pCar = new ArrayList<Passenger>();
 	
 	public Car(int Capacity, int identifier) {
 		this.Capacity = Capacity;
 		this.identifier	= identifier;
+		currLoad = 0;
 	}
 
+
 	public void load(){
+		// Car invoked load
 
 	}
 
 	public void unload(){
+		// Car invoked unload
 
 	}
 
@@ -46,5 +53,17 @@ public class Car implements Runnable {
 		} catch (Exception e) {
 			throw new RuntimeException(e);
 		}
+	}
+
+	public int getCurrLoad() {
+		return currLoad;
+	}
+
+	public void setCurrLoad(int currLoad) {
+		this.currLoad = currLoad;
+	}
+
+	public int getCapacity() {
+		return Capacity;
 	}
 }
