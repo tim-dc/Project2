@@ -16,8 +16,8 @@ public class Driver {
 		int numPassengers, capacity, numCars;
 		Scanner scan = new Scanner(System.in);
 
-		//ArrayList<Semaphore> LoadingArea = new ArrayList<Semaphore>();
-		//ArrayList<Semaphore> UnLoadingArea = new ArrayList<Semaphore>();
+		ArrayList<Semaphore> LoadingArea = new ArrayList<Semaphore>();
+		ArrayList<Semaphore> UnLoadingArea = new ArrayList<Semaphore>();
 		
 		System.out.print("Enter the number of passenger processes: ");
 		numPassengers = scan.nextInt();
@@ -48,26 +48,9 @@ public class Driver {
 //			System.out.println("CARS - " +cars[i]);
 		}
 
-		// Test
-		for(int i=0; i< numCars; i++){
-			System.out.println("Car #" + carQueue.remove().getId()+ " with capacity of: " + capacity);
-		}
-
 		// Add passengers to Queue
 		for(int i = 0; i < numPassengers; i++){
 			passengers[i].start();
-		}
-
-		// If passenger queue is enough for max capacity
-
-		// Loop
-		if(line.size() >= capacity){
-			// set car to load
-			for(int i = 0; i < capacity; i++){
-				System.out.println("Passenger " + line.remove() + "has boarded");
-			}
-
-			System.out.println("Remaining passengers = " + line.size());
 		}
 
 
@@ -83,7 +66,6 @@ public class Driver {
 //		for(int k = 0; k < m; k++) {
 //			UnLoadingArea.add(new Semaphore());
 //		}
-
 
 
 
