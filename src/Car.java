@@ -4,6 +4,8 @@ import java.util.concurrent.Semaphore;
 public class Car extends Thread {
 	
 	int capacity, identifier;
+	boolean status = false;
+
 
 	private int currLoad;
 	static ArrayList<Passenger> pCar = new ArrayList<Passenger>();
@@ -17,13 +19,11 @@ public class Car extends Thread {
 		//put in passengers
 		System.out.println("Capacity = " + capacity + " Queue Size = " + Driver.line.size());
 		boolean isFull = false;
-		int counter = 0;
 
-//		for(int i = 0; i < this.capacity; i++) {
 		do{
 			if(Driver.line.size() >= this.capacity ) {
 				// Add passengers
-				for(int j = 0; j < this.capacity; j++){
+				for(int j = 0; j < this.capacity-1; j++){
 					Passenger p = Driver.line.remove();
 					pCar.add(p);
 					System.out.println("Passenger # " + p.getPassengerID()+ " joined Car " + this.identifier);
@@ -35,26 +35,52 @@ public class Car extends Thread {
 				//take a bit longer to travel
 				System.out.println("Car " + this.identifier + " is on an adventure with " + pCar.size());
 				Thread.sleep(((int) (Math.random() * 1000)));
-				isFull = true;
-			}
 
-//			if(counter)
+				Car a = Driver.carQueue.remove();
+				Driver.carQueue.add(a);
+
+				isFull = true;
+				this.status = true;
+			}
 
 		}while (isFull !=  true);
 
-
-//		}
 	}
 
 	public void unload() throws InterruptedException{
 		//car stops running
-		doAction(" has stopped");
-		//car unloads passengers
-		doAction(" may unload passengers");
-		//drop passenger here
-		System.out.println("Current pCar  Size = " + pCar.size());
-		pCar.removeAll(pCar);
-		System.out.println("pCar after Clear Size = " + pCar.size());
+		Car trueCarCount = Driver.carCounter.remove();
+		Driver.carCounter.add(trueCarCount);
+
+		// If same car (in order)
+		if(trueCarCount.identifier == this.identifier){
+			// if current car is not 0 (first)
+			if(trueCarCount.identifier != 0){
+				// If previous car is not loaded (false)
+				if(Driver.cars[trueCarCount.identifier-1].status == false){
+					doAction(" has stopped");
+					//car unloads passengers
+					doAction(" may unload passengers");
+					//drop passenger here
+					System.out.println("Current pCar  Size = " + pCar.size());
+					pCar.removeAll(pCar);
+					System.out.println("pCar after Clear Size = " + pCar.size());
+				}
+			}else{
+				// if car is 0, look at last car (max value)
+				if(Driver.cars[Driver.cars.length].status == false){
+					doAction(" has stopped");
+					//car unloads passengers
+					doAction(" may unload passengers");
+					//drop passenger here
+					System.out.println("Current pCar  Size = " + pCar.size());
+					pCar.removeAll(pCar);
+					System.out.println("pCar after Clear Size = " + pCar.size());
+				}
+			}
+		}
+
+
 	}
 
 	private void doAction(String action) throws InterruptedException {

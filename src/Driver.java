@@ -8,7 +8,8 @@ public class Driver {
 	static Passenger passengers[];
 	static Car cars[];
 	static Queue<Passenger> line = new LinkedList<>();
-
+	static Queue<Car>  carQueue = new LinkedList<>();
+	static Queue<Car> carCounter = new LinkedList<>();
 
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
@@ -36,11 +37,24 @@ public class Driver {
 			passengers[i] = new Passenger(i);
 		}
 
-		for(int i = 0; i < m; i++) {
+		for(int i = 0; i < m; i++){
 			cars[i] = new Car(i, C);
-//			new Thread(new Car(i, C));
-			cars[i].start();
+			carQueue.add(cars[i]);
+			carCounter.add(cars[i]);
 		}
+
+		for(int i = 0; i < m; i++) {
+//			cars[i] = new Car(i, C);
+//			carQueue.add(cars[i]);
+			Car a = carQueue.remove();
+			carQueue.add(a);
+
+			new Thread(cars[i]);
+
+			cars[a.identifier].start();
+			System.out.println("car count = " + cars.length + " Index = " +i + "--------");
+		}
+
 
 		for(int i = 0; i < n; i++){
 			System.out.println("Passenger #" + passengers[i].getPassengerID());
