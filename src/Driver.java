@@ -16,8 +16,8 @@ public class Driver {
 		int numPassengers, capacity, numCars;
 		Scanner scan = new Scanner(System.in);
 
-		ArrayList<Semaphore> LoadingArea = new ArrayList<Semaphore>();
-		ArrayList<Semaphore> UnLoadingArea = new ArrayList<Semaphore>();
+		//ArrayList<Semaphore> LoadingArea = new ArrayList<Semaphore>();
+		//ArrayList<Semaphore> UnLoadingArea = new ArrayList<Semaphore>();
 		
 		System.out.print("Enter the number of passenger processes: ");
 		numPassengers = scan.nextInt();
