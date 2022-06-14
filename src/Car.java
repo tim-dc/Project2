@@ -6,6 +6,7 @@ import java.util.concurrent.Semaphore;
 public class Car extends Thread {
 	
 	int capacity, identifier;
+	int endCtr = 0;
 
 	private int currLoad;
 	static ArrayList<Passenger> pCar = new ArrayList<Passenger>();
@@ -17,7 +18,7 @@ public class Car extends Thread {
 
 	public void load() throws InterruptedException{
 		//put in passengers
-		System.out.println("Capacity = " + capacity + " Queue Size = " + Driver.line.size());
+		//System.out.println("Capacity = " + capacity + " Queue Size = " + Driver.line.size());
 		boolean isFull = false;
 		int counter = 0;
 
@@ -30,14 +31,19 @@ public class Car extends Thread {
 					pCar.add(p);
 					System.out.println(getTimeStamp() + " Passenger # " + p.getPassengerID()+ " joined Car " + this.identifier);
 				}
-				System.out.println("----- PCar ----- " + pCar.size());
-				System.out.println("remaining passengers: " + Driver.line.size());
+				//System.out.println("----- PCar ----- " + pCar.size());
+				//System.out.println("remaining passengers: " + Driver.line.size());
 				//car starts running
-				doAction(" is at capacity");
+				System.out.println(getTimeStamp() + " All aboard car " + this.identifier);
 				//take a bit longer to travel
 				System.out.println(getTimeStamp() + " Car " + this.identifier + " is on an adventure with " + pCar.size());
 				Thread.sleep(((int) (Math.random() * 1000)));
 				isFull = true;
+			}else{
+				if(Driver.line.size() < this.capacity && endCtr < 1){
+					System.out.println("All rides completed");
+					endCtr++;
+				}
 			}
 
 //			if(counter)
@@ -52,15 +58,15 @@ public class Car extends Thread {
 		//car stops running
 		doAction(" has stopped");
 		//car unloads passengers
-		doAction(" may unload passengers");
+		System.out.println(getTimeStamp() + " All ashore from car " + this.identifier);
 		//drop passenger here
-		System.out.println("Current pCar  Size = " + pCar.size());
+		//System.out.println("Current pCar  Size = " + pCar.size());
 		pCar.removeAll(pCar);
-		System.out.println("pCar after Clear Size = " + pCar.size());
+		//System.out.println("pCar after Clear Size = " + pCar.size());
 	}
 
 	private void doAction(String action) throws InterruptedException {
-		System.out.println(getTimeStamp() + "Car " + this.identifier + action);
+		System.out.println(getTimeStamp() + " Car " + this.identifier + action);
 		Thread.sleep(((int) (Math.random() * 1000)));
 	}
 
@@ -83,6 +89,8 @@ public class Car extends Thread {
 		} catch (Exception e) {
 			throw new RuntimeException(e);
 		}
+
+
 	}
 
 	public static void sleep(int time) {
