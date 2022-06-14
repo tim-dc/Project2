@@ -39,11 +39,6 @@ public class Car extends Thread {
 				System.out.println(getTimeStamp() + " Car " + this.identifier + " is on an adventure with " + pCar.size());
 				Thread.sleep(((int) (Math.random() * 1000)));
 				isFull = true;
-			}else{
-				if(Driver.line.size() < this.capacity && endCtr < 1){
-					System.out.println("All rides completed");
-					endCtr++;
-				}
 			}
 
 //			if(counter)
@@ -67,7 +62,7 @@ public class Car extends Thread {
 
 	private void doAction(String action) throws InterruptedException {
 		System.out.println(getTimeStamp() + " Car " + this.identifier + action);
-		Thread.sleep(5 * 1000);
+		Thread.sleep(3 * 1000);
 	}
 
 	private String getTimeStamp() {
