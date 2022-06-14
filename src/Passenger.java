@@ -34,22 +34,22 @@ public class Passenger extends Thread{
     public void run() {
 
         // Wait (wander)
-//        wander();              // Passenger wanders around for a random time
-//        this.joinQueue(this.passengerID); // Get in Queue
+        wander();              // Passenger wanders around for a random time
+        this.joinQueue(this.passengerID); // Get in Queue
 
         // Temporary
-        long a = Math.round(Math.random());
-        if(a%2 == 0){
-            this.joinQueue(this.passengerID);
-        }else{
-            wander();
-            this.joinQueue(this.passengerID);
-        }
-
-        for(int i =0; i < Driver.line.size();i++){
+//        long a = Math.round(Math.random());
+//        if(a%2 == 0){
+//            this.joinQueue(this.passengerID);
+//        }else{
+//            wander();
+//            this.joinQueue(this.passengerID);
+//        }
+//
+//        for(int i =0; i < Driver.line.size();i++){
             // This would be replaced by cars
 //            System.out.println("Queue " + Driver.line.remove());
-        }
+//        }
     }
 
 

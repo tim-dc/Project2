@@ -15,17 +15,35 @@ public class Car extends Thread {
 
 	public void load() throws InterruptedException{
 		//put in passengers
-		for(int i = 0; i <= this.capacity; i++) {
-			//add passenger here
-			pCar.add(new Passenger(i));
-			if(i==this.capacity) {
+		System.out.println("Capacity = " + capacity + " Queue Size = " + Driver.line.size());
+		boolean isFull = false;
+		int counter = 0;
+
+//		for(int i = 0; i < this.capacity; i++) {
+		do{
+			if(Driver.line.size() >= this.capacity ) {
+				// Add passengers
+				for(int j = 0; j < this.capacity; j++){
+					Passenger p = Driver.line.remove();
+					pCar.add(p);
+					System.out.println("Passenger # " + p.getPassengerID()+ " joined Car " + this.identifier);
+				}
+				System.out.println("----- PCar ----- " + pCar.size());
+				System.out.println("remaining passengers: " + Driver.line.size());
 				//car starts running
 				doAction(" is at capacity");
 				//take a bit longer to travel
 				System.out.println("Car " + this.identifier + " is on an adventure with " + pCar.size());
 				Thread.sleep(((int) (Math.random() * 1000)));
+				isFull = true;
 			}
-		}
+
+//			if(counter)
+
+		}while (isFull !=  true);
+
+
+//		}
 	}
 
 	public void unload() throws InterruptedException{
@@ -34,21 +52,25 @@ public class Car extends Thread {
 		//car unloads passengers
 		doAction(" may unload passengers");
 		//drop passenger here
+		System.out.println("Current pCar  Size = " + pCar.size());
 		pCar.removeAll(pCar);
+		System.out.println("pCar after Clear Size = " + pCar.size());
 	}
 
 	private void doAction(String action) throws InterruptedException {
 		System.out.println("Car " + this.identifier + action);
-		Thread.sleep(((int) (Math.random() * 100)));
+		Thread.sleep(((int) (Math.random() * 1000)));
 	}
 
 	@Override
 	public void run() {
 		try{
 			while (true) {
-				doAction(" can be loaded");
-				load();
-				unload();
+//				if(capacity == Driver.line.size()){
+					doAction(" can be loaded");
+					load();
+					unload();
+//				}
 			}
 		} catch (Exception e) {
 			throw new RuntimeException(e);

@@ -38,6 +38,8 @@ public class Driver {
 
 		for(int i = 0; i < m; i++) {
 			cars[i] = new Car(i, C);
+//			new Thread(new Car(i, C));
+			cars[i].start();
 		}
 
 		for(int i = 0; i < n; i++){
@@ -45,30 +47,9 @@ public class Driver {
 			passengers[i].start();
 		}
 
-		for(int i = 0; i < C; i++) {
-			new Thread(new Car(i+1, C));
-			cars[i+1].start();
-		}
-
-//		System.out.printf("Enter n: %d " + "Enter C: %d " + "Enter m: %d ", n, C, m);
-		
-//		for(int i = 0; i < m - 1; i++) {
-//			cars.add(new Car(C, i));
-//		}
+//		for(int i = 0; i < C; i++) {
 //
-//		for(int j = 0; j < m; j++) {
-//			LoadingArea.add(new Semaphore());
 //		}
-//
-//		for(int k = 0; k < m; k++) {
-//			UnLoadingArea.add(new Semaphore());
-//		}
-
-
-		// If passenger queue is enough for max capacity
-//			if(line.size() >= Car capacity);
-
-
 
 	}
 
