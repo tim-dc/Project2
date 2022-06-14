@@ -6,6 +6,7 @@ import java.util.Scanner;
 public class Driver {
 
 	static Passenger passengers[];
+	static Car cars[];
 	static Queue<Passenger> line = new LinkedList<>();
 
 
@@ -14,7 +15,6 @@ public class Driver {
 		
 		int n, C, m;
 		Scanner scan = new Scanner(System.in);
-		ArrayList<Car> cars = new ArrayList<Car>();
 		
 		ArrayList<Semaphore> LoadingArea = new ArrayList<Semaphore>();
 		ArrayList<Semaphore> UnLoadingArea = new ArrayList<Semaphore>();
@@ -22,11 +22,22 @@ public class Driver {
 		System.out.print("Enter the number of passenger processes: ");
 		n = scan.nextInt();
 
+		System.out.print("Enter the capacity of the car: ");
+		C = scan.nextInt();
+
+		System.out.print("Enter the number of cars: ");
+		m = scan.nextInt();
+
 		// Instantiate Passengers
 		passengers = new Passenger[n];
+		cars = new Car[m];
 
 		for(int i = 0; i < n; i++){
 			passengers[i] = new Passenger(i);
+		}
+
+		for(int i = 0; i < m; i++) {
+			cars[i] = new Car(i, C);
 		}
 
 		for(int i = 0; i < n; i++){
@@ -34,14 +45,11 @@ public class Driver {
 			passengers[i].start();
 		}
 
+		for(int i = 0; i < C; i++) {
+			new Thread(new Car(i+1, C));
+			cars[i+1].start();
+		}
 
-
-//		System.out.print("Enter the capacity of the car: ");
-//		C = scan.nextInt();
-//
-//		System.out.print("Enter the number of cars: ");
-//		m = scan.nextInt();
-//
 //		System.out.printf("Enter n: %d " + "Enter C: %d " + "Enter m: %d ", n, C, m);
 		
 //		for(int i = 0; i < m - 1; i++) {
