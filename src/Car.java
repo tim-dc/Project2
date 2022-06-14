@@ -26,7 +26,7 @@ public class Car extends Thread {
 		do{
 			if(Driver.line.size() >= this.capacity ) {
 				// Add passengers
-				for(int j = 0; j < this.capacity; j++){
+				for(int j = 0; j < this.capacity-1; j++){
 					Passenger p = Driver.line.remove();
 					pCar.add(p);
 					System.out.println(getTimeStamp() + " Passenger # " + p.getPassengerID()+ " joined Car " + this.identifier);
@@ -67,7 +67,7 @@ public class Car extends Thread {
 
 	private void doAction(String action) throws InterruptedException {
 		System.out.println(getTimeStamp() + " Car " + this.identifier + action);
-		Thread.sleep(((int) (Math.random() * 1000)));
+		Thread.sleep(5 * 1000);
 	}
 
 	private String getTimeStamp() {
