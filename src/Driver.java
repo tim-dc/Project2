@@ -1,3 +1,5 @@
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.Queue;
@@ -43,7 +45,9 @@ public class Driver {
 		}
 
 		for(int i = 0; i < n; i++){
-			System.out.println("Passenger #" + passengers[i].getPassengerID());
+			LocalDateTime dateTime = LocalDateTime.now();
+			DateTimeFormatter formatter = DateTimeFormatter.ofPattern("HH:mm:ss");
+			System.out.println(dateTime.format(formatter) + " Passenger #" + passengers[i].getPassengerID());
 			passengers[i].start();
 		}
 
