@@ -19,7 +19,9 @@ public class Car extends Thread {
 		//put in passengers
 		System.out.println("Capacity = " + capacity + " Queue Size = " + Driver.line.size());
 		boolean isFull = false;
+		int counter = 0;
 
+//		for(int i = 0; i < this.capacity; i++) {
 		do{
 			if(Driver.line.size() >= this.capacity ) {
 				// Add passengers
@@ -43,8 +45,12 @@ public class Car extends Thread {
 				this.status = true;
 			}
 
+//			if(counter)
+
 		}while (isFull !=  true);
 
+
+//		}
 	}
 
 	public void unload() throws InterruptedException{
@@ -85,7 +91,7 @@ public class Car extends Thread {
 
 	private void doAction(String action) throws InterruptedException {
 		System.out.println("Car " + this.identifier + action);
-		Thread.sleep(((int) (Math.random() * 1000)));
+		Thread.sleep( 10 * 1000);
 	}
 
 	@Override
