@@ -1,12 +1,19 @@
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.concurrent.Semaphore;
+import java.time.LocalDateTime;
 
 public class Car extends Thread {
 	
 	int capacity, identifier;
 
+
 	private int currLoad;
 	static ArrayList<Passenger> pCar = new ArrayList<Passenger>();
+
+	LocalDateTime dateTime = LocalDateTime.now();
+	DateTimeFormatter formatter = DateTimeFormatter.ofPattern("HH:mm:ss");
+
 
 	Car(int identifier, int capacity) {
 		this.identifier = identifier;
@@ -15,9 +22,9 @@ public class Car extends Thread {
 
 	public void load() throws InterruptedException{
 		//put in passengers
-		System.out.println("Capacity = " + capacity + " Queue Size = " + Driver.line.size());
+//		System.out.println("Capacity = " + capacity + " Queue Size = " + Driver.line.size());
 		boolean isFull = false;
-		int counter = 0;
+
 
 //		for(int i = 0; i < this.capacity; i++) {
 		do{
@@ -26,16 +33,19 @@ public class Car extends Thread {
 				for(int j = 0; j < this.capacity-1; j++){
 					Passenger p = Driver.line.remove();
 					pCar.add(p);
-					System.out.println("Passenger # " + p.getPassengerID()+ " joined Car " + this.identifier);
+					System.out.println( dateTime.format(formatter) + " Passenger # " + p.getPassengerID()+ " joined Car " + this.identifier);
 				}
-				System.out.println("----- PCar ----- " + pCar.size());
-				System.out.println("remaining passengers: " + Driver.line.size());
+//				System.out.println("----- PCar ----- " + pCar.size());
+//				System.out.println("remaining passengers: " + Driver.line.size());
 				//car starts running
-				doAction(" is at capacity");
+				doAction(" all aboard");
 				//take a bit longer to travel
-				System.out.println("Car " + this.identifier + " is on an adventure with " + pCar.size());
+//				System.out.println("Car " + this.identifier + " is on an adventure with " + pCar.size());
 				Thread.sleep(((int) (Math.random() * 1000)));
 				isFull = true;
+			}else if(Driver.line.size() < this.capacity && Driver.counter < 1){
+				Driver.counter=2;
+				System.out.println(dateTime.format(formatter)  + " All Rides Completed!");
 			}
 
 //			if(counter)
@@ -50,15 +60,16 @@ public class Car extends Thread {
 		//car stops running
 		doAction(" has stopped");
 		//car unloads passengers
-		doAction(" may unload passengers");
+		doAction(" All ashore!!");
+		System.out.println(dateTime.format(formatter) + " Car " + this.identifier + " may unload passengers");
 		//drop passenger here
-		System.out.println("Current pCar  Size = " + pCar.size());
+//		System.out.println("Current pCar  Size = " + pCar.size());
 		pCar.removeAll(pCar);
-		System.out.println("pCar after Clear Size = " + pCar.size());
+//		System.out.println("pCar after Clear Size = " + pCar.size());
 	}
 
 	private void doAction(String action) throws InterruptedException {
-		System.out.println("Car " + this.identifier + action);
+		System.out.println(dateTime.format(formatter) + " Car " + this.identifier + action);
 		Thread.sleep(((int) (Math.random() * 1000)));
 	}
 
@@ -73,7 +84,7 @@ public class Car extends Thread {
 //				}
 			}
 		} catch (Exception e) {
-			throw new RuntimeException(e);
+//			throw new RuntimeException(e);
 		}
 	}
 

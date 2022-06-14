@@ -1,6 +1,12 @@
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+
 public class Passenger extends Thread{
 
     int passengerID, carID;
+
+    LocalDateTime dateTime = LocalDateTime.now();
+    DateTimeFormatter formatter = DateTimeFormatter.ofPattern("HH:mm:ss");
 
     Passenger(int passengerID) {
         this.passengerID = passengerID;
@@ -28,7 +34,7 @@ public class Passenger extends Thread{
 
     private void joinQueue(int passengerID){
         Driver.line.add(this);
-        System.out.println("Passenger #" + passengerID + " Joined the Queue");
+        System.out.println(dateTime.format(formatter) + " Passenger #" + passengerID + " Joined the Queue");
     }
 
     public void run() {

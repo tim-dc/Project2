@@ -8,6 +8,7 @@ public class Driver {
 	static Passenger passengers[];
 	static Car cars[];
 	static Queue<Passenger> line = new LinkedList<>();
+	static int counter = 0;
 
 
 	public static void main(String[] args) {
