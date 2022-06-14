@@ -1,3 +1,5 @@
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.Queue;
@@ -6,7 +8,7 @@ import java.util.Scanner;
 public class Driver {
 
 	static Passenger passengers[];
-	static Car cars[];
+	//static Car cars[];
 	static Queue<Passenger> line = new LinkedList<>();
 
 
@@ -30,20 +32,24 @@ public class Driver {
 
 		// Instantiate Passengers
 		passengers = new Passenger[n];
-		cars = new Car[m];
+		//cars = new Car[m];
+		Queue<Car> cars = new LinkedList<Car>();
 
 		for(int i = 0; i < n; i++){
 			passengers[i] = new Passenger(i);
 		}
 
 		for(int i = 0; i < m; i++) {
-			cars[i] = new Car(i, C);
+			//cars[i] = new Car(i, C);
 //			new Thread(new Car(i, C));
-			cars[i].start();
+			//cars[i].start();
+			Car car = new Car(i, C);
+			car.start();
+			cars.add(car);
 		}
 
 		for(int i = 0; i < n; i++){
-			System.out.println("Passenger #" + passengers[i].getPassengerID());
+			System.out.println(getTimeStamp() + " Passenger #" + passengers[i].getPassengerID());
 			passengers[i].start();
 		}
 
@@ -51,6 +57,12 @@ public class Driver {
 //
 //		}
 
+	}
+
+	private static String getTimeStamp() {
+		LocalDateTime dateTime = LocalDateTime.now();
+		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("HH:mm:ss");
+		return dateTime.format(formatter);
 	}
 
 }

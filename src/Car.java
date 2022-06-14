@@ -1,3 +1,5 @@
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.concurrent.Semaphore;
 
@@ -23,17 +25,17 @@ public class Car extends Thread {
 		do{
 			if(Driver.line.size() >= this.capacity ) {
 				// Add passengers
-				for(int j = 0; j < this.capacity-1; j++){
+				for(int j = 0; j < this.capacity; j++){
 					Passenger p = Driver.line.remove();
 					pCar.add(p);
-					System.out.println("Passenger # " + p.getPassengerID()+ " joined Car " + this.identifier);
+					System.out.println(getTimeStamp() + " Passenger # " + p.getPassengerID()+ " joined Car " + this.identifier);
 				}
 				System.out.println("----- PCar ----- " + pCar.size());
 				System.out.println("remaining passengers: " + Driver.line.size());
 				//car starts running
 				doAction(" is at capacity");
 				//take a bit longer to travel
-				System.out.println("Car " + this.identifier + " is on an adventure with " + pCar.size());
+				System.out.println(getTimeStamp() + " Car " + this.identifier + " is on an adventure with " + pCar.size());
 				Thread.sleep(((int) (Math.random() * 1000)));
 				isFull = true;
 			}
@@ -58,8 +60,14 @@ public class Car extends Thread {
 	}
 
 	private void doAction(String action) throws InterruptedException {
-		System.out.println("Car " + this.identifier + action);
+		System.out.println(getTimeStamp() + "Car " + this.identifier + action);
 		Thread.sleep(((int) (Math.random() * 1000)));
+	}
+
+	private String getTimeStamp() {
+		LocalDateTime dateTime = LocalDateTime.now();
+		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("HH:mm:ss");
+		return dateTime.format(formatter);
 	}
 
 	@Override
